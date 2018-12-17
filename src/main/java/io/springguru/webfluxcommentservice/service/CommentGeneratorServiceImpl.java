@@ -8,7 +8,7 @@ import reactor.core.publisher.SynchronousSink;
 import reactor.util.function.Tuple2;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Random;
 import java.util.function.BiFunction;
 
@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
  * @since 11/12/2018
  */
 @Service
-public class CommentGeneratorServiceImpl implements CommentGeneratorService{
+public class CommentGeneratorServiceImpl implements CommentGeneratorService {
 
     @Override
     public Flux<Comment> fetchCommentStream(Duration period) {
@@ -39,13 +39,11 @@ public class CommentGeneratorServiceImpl implements CommentGeneratorService{
 
         Random ran = new Random();
         int randomUserId = ran.nextInt(9999999) + 5;
-        int randomCommentId = ran.nextInt(9999999) + 5;
 
         return Comment.builder()
-                .userId(randomUserId + "")
-                .createdTime(LocalDateTime.now())
-                .id(randomCommentId + "")
-                .like(randomCommentId % 2 == 0)
+                .subscriber(randomUserId + "")
+                .createdTime(Instant.now())
+                .liked(randomUserId % 2 == 0)
                 .message(RandomStringUtils.random(100, true, true))
                 .build();
 

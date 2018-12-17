@@ -1,0 +1,26 @@
+package io.springguru.webfluxcommentservice.web;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.RouterFunctions;
+import org.springframework.web.reactive.function.server.ServerResponse;
+
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+
+/**
+ * @author serdardundar
+ * @since 14/12/2018
+ */
+@Configuration
+public class CommentRouter {
+
+    @Bean
+    public RouterFunction<ServerResponse> route(CommentController controller){
+        return RouterFunctions
+                .route(GET("/comment").and(accept(MediaType.APPLICATION_JSON)), controller::fetchComments)
+                .andRoute(GET("/comment").and(accept(MediaType.APPLICATION_STREAM_JSON)), controller::streamComments);
+    }
+}

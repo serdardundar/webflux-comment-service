@@ -3,7 +3,7 @@ package io.springguru.webfluxcommentservice.model;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * This is a simulated social media comment class
@@ -15,9 +15,8 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 public class Comment {
 
-    private String id;
     private String message;
-    private LocalDateTime createdTime;
-    private String userId;
-    private boolean like;
+    private Instant createdTime;
+    private String subscriber;
+    private boolean liked;
 }
