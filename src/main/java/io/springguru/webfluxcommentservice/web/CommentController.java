@@ -28,7 +28,7 @@ public class CommentController {
 
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(this.commentGeneratorService.fetchCommentStream(Duration.ofMillis(100))
+                .body(this.commentGeneratorService.fetchCommentStream(Duration.ofMillis(1000L))
                         .take(size), Comment.class);
     }
 
